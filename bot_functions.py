@@ -24,9 +24,6 @@ if not TOKEN:
     raise RuntimeError("Brak TELEGRAM_BOT_TOKEN w zmiennych środowiskowych")
 
 
-
-
-
 def user_flag(user_id) ->bool:
     if user_id in get_whitelist_users():
         return True
