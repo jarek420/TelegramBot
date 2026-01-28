@@ -24,9 +24,10 @@ if not TOKEN:
     raise RuntimeError("Brak TELEGRAM_BOT_TOKEN w zmiennych środowiskowych")
 
 
-# flag for checking if active user is valid for this action
-# TODO: read user list from white list maybe just txt file idk if it's secure
-async def user_flag(user_id) ->bool:
+
+
+
+def user_flag(user_id) ->bool:
     if user_id in get_whitelist_users():
         return True
     else: False
@@ -65,6 +66,9 @@ async def pick_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif input_message in ["komendy"]:
         message = get_komendy()
+
+    elif input_message in ["id"]:
+        await update.message.reply_text(update.effective_user.id)
 
     else:
         message = reply_echo_error(input_message)
