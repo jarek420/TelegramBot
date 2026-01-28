@@ -1,2 +1,15 @@
-whitelist.txt
+# Python
 __pycache__/
+*.py[cod]
+
+# Virtualenv
+venv/
+.venv/
+
+# Logs / cache
+*.log
+*.tmp
+
+# Secrets
+.env
+whitelist.txt
