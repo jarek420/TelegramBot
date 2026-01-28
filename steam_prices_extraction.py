@@ -78,12 +78,12 @@ def fetch_data(names):
 
 def get_message_cases():
 
-    if check_file("TelegramBot/output_prices_cases.txt"):
-        responses = fetch_data(read_file("TelegramBot/cases.txt"))
+    if check_file("cs_market_data/output_prices_cases.txt"):
+        responses = fetch_data(read_file("cs_market_data/cases.txt"))
         print(responses)
-        save_data_to_file("TelegramBot/output_prices_cases.txt", responses)
+        save_data_to_file("cs_market_data/output_prices_cases.txt", responses)
     else:
-        responses = get_data_from_file("TelegramBot/output_prices_cases.txt")
+        responses = get_data_from_file("cs_market_data/output_prices_cases.txt")
         print(responses)
 
     message = "    SKRZYNKI CS2    \n"
@@ -96,12 +96,12 @@ def get_message_cases():
 
 
 def get_message_stockholm_capsules():
-    if check_file("TelegramBotoutput_prices_capsules_stockholm.txt"):
-        responses = fetch_data(read_file("TelegramBot/stockholm_capsules.txt"))
+    if check_file("cs_market_dataoutput_prices_capsules_stockholm.txt"):
+        responses = fetch_data(read_file("cs_market_data/stockholm_capsules.txt"))
         print(responses)
-        save_data_to_file("TelegramBot/output_prices_capsules_stockholm.txt", responses)
+        save_data_to_file("cs_market_data/output_prices_capsules_stockholm.txt", responses)
     else:
-        responses = get_data_from_file("TelegramBot/output_prices_capsules_stockholm.txt")
+        responses = get_data_from_file("cs_market_data/output_prices_capsules_stockholm.txt")
         print(responses)
 
     message = "Kapsuły CS2    \n"
