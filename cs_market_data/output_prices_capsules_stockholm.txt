@@ -1,6 +1,6 @@
-1769596295.2803197
-['Stockholm%202021%20Legends%20Sticker%20Capsule', '7,40zł', '7,41zł']
-['Stockholm%202021%20Challengers%20Sticker%20Capsule', '14,23zł', '11,99zł']
+1769602854.3793688
+['Stockholm%202021%20Legends%20Sticker%20Capsule', '7,25zł', '7,35zł']
+['Stockholm%202021%20Challengers%20Sticker%20Capsule', '14,23zł', '14,19zł']
 ['Stockholm%202021%20Contenders%20Sticker%20Capsule', '12,99zł', '12,96zł']
-['Stockholm%202021%20Finalists%20Autograph%20Capsule', '2,83zł', '2,84zł']
-['Stockholm%202021%20Champions%20Autograph%20Capsule', '2,81zł', '2,82zł']
+['Stockholm%202021%20Finalists%20Autograph%20Capsule', '2,83zł', '2,80zł']
+['Stockholm%202021%20Champions%20Autograph%20Capsule', '3,45zł', '3,44zł']

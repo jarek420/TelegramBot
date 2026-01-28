@@ -40,8 +40,6 @@ def get_data_from_file(file_name):
 def check_file(file_name):
     with open(file_name, 'r', encoding = "utf-8") as f:
         file_timestamp = f.readline().strip()
-    # if file_timestamp == '':
-    #     file_timestamp = 123
     diff = float(time.time()) - float(file_timestamp)
     return diff >=3600
 
@@ -96,7 +94,7 @@ def get_message_cases():
 
 
 def get_message_stockholm_capsules():
-    if check_file("cs_market_dataoutput_prices_capsules_stockholm.txt"):
+    if check_file("cs_market_data/output_prices_capsules_stockholm.txt"):
         responses = fetch_data(read_file("cs_market_data/stockholm_capsules.txt"))
         print(responses)
         save_data_to_file("cs_market_data/output_prices_capsules_stockholm.txt", responses)

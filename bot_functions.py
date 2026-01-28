@@ -45,31 +45,32 @@ def get_komendy():
 async def pick_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     input_message = update.message.text.strip().lower()
     print(input_message)
+    if user_flag(update.effective_user.id):
+        if input_message in ["pogoda", "Pogoda", "pgda"]:
+            message = get_weather_message([53.4285, 14.5528]) # Default szczecin
 
-    if input_message in ["pogoda", "Pogoda", "pgda"]:
-        message = get_weather_message([53.4285, 14.5528]) # Default szczecin
+        elif input_message in ["gielda", "giełda", "stock"]:
+            message = get_stock_message()
+        
+        elif input_message in ["lokalikzacja", "lokacja", "gdzie jestem"]:
+            message = "Narazie nie wiem jak handlowac pobieranie lokalizacji jestem tylko glupim botem ;("
 
-    elif input_message in ["gielda", "giełda", "stock"]:
-        message = get_stock_message()
-    
-    elif input_message in ["lokalikzacja", "lokacja", "gdzie jestem"]:
-        message = "Narazie nie wiem jak handlowac pobieranie lokalizacji jestem tylko glupim botem ;("
+        elif input_message in ["skrzynki"]:
+            message = get_message_cases()
 
-    elif input_message in ["skrzynki"]:
-        message = get_message_cases()
+        elif input_message in ["stockholm", "kapsuly stockholm"]:
+            message = get_message_stockholm_capsules()
 
-    elif input_message in ["stockholm", "kapsuly stockholm"]:
-        message = get_message_stockholm_capsules()
+        elif input_message in ["komendy"]:
+            message = get_komendy()
 
-    elif input_message in ["komendy"]:
-        message = get_komendy()
+        elif input_message in ["id"]:
+            await update.message.reply_text(update.effective_user.id)
 
-    elif input_message in ["id"]:
-        await update.message.reply_text(update.effective_user.id)
-
+        else:
+            message = reply_echo_error(input_message)
     else:
-        message = reply_echo_error(input_message)
-    
+        message = f"User o id \n\n{update.effective_user.id}\n\n nie ma na whiteliscie"
     await update.message.reply_text(message)
 
 
