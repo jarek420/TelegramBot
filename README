@@ -1,0 +1,2 @@
+file cases.txt contains names of cases i want to check on steam market.
+output_prices.txt holds data from last hour since steam dont have API and request are limited to some number an hour or day.
