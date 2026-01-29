@@ -7,6 +7,12 @@ from steam_prices_extraction import get_message_cases, get_message_stockholm_cap
 import os
 from white_list import get_whitelist_users
 
+
+GREEN = "\033[32m"
+RESET = "\033[0m"
+RED = "\033[31m"
+
+
 '''
 To generate API for your telegram bot simply just find @BotFather on telegram and send him:
 
@@ -25,7 +31,8 @@ if not TOKEN:
 
 
 def user_flag(user_id) ->bool:
-    if user_id in get_whitelist_users():
+    white_list = get_whitelist_users()
+    if user_id in white_list:
         return True
     else: False
 
@@ -70,7 +77,8 @@ async def pick_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             message = reply_echo_error(input_message)
     else:
-        message = f"User o id \n\n{update.effective_user.id}\n\n nie ma na whiteliscie"
+        print(f"{GREEN}DEBUG{RESET} ID: {update.effective_user.id} is not on the whitelist")
+        message = f"User \n\n{update.effective_user.name}\n\n nie ma na whiteliscie"
     await update.message.reply_text(message)
 
 
