@@ -3,7 +3,7 @@ from telegram import Update
 from telegram.ext import Application, MessageHandler, ContextTypes, filters
 from stockmarket import get_stock_message
 from weather import get_weather_message
-from steam_prices_extraction import get_message_cases, get_message_stockholm_capsules
+from steam_extraction import get_message_cases, get_message_stockholm_capsules
 import os
 from white_list import get_whitelist_users
 
