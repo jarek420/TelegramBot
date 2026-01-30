@@ -1,3 +1,5 @@
+import os
+import difflib
 import requests
 import time
 from datetime import datetime
@@ -73,16 +75,70 @@ def fetch_data(names):
 
     return responses
 
+def get_item_price_by_name(query: str,
+                           input_dir: str = "cs_market_data/input_files",
+                           max_suggestions: int = 10,
+                           cutoff: float = 0.52):
+    
+    q = (query or "").strip()
+    if not q:
+        return {"query": query, "matches": [], "prices": []}
 
-def get_item_price_by_name(name):
-    # steps:
-    # get all files from cs_market_data/input_files
-    # find best matching name eg: user types "Stockholm 2021" -> program returns all capsules that have stockholm 2021 in name
-    # eg2: user searches for dreams and nightmares / dream nightmares and it will leave him with proper output which is]: Dreams & Nightmares Case
-    # main goal is to give uuser back best matching item so even if he misstype something it will return him an output.
-    # then get thius name run fetch_data(names) and return responses
-    ...
+    q_low = q.lower()
+
+    for root, _, files in os.walk(input_dir):
+        for fn in files:
+            if fn.lower().endswith(".txt"):
+                path = os.path.join(root, fn)
+                try:
+                    for line in read_file(path):
+                        s = line.strip()
+                        if s:
+                            all_items.append(s)
+                except FileNotFoundError:
+                    continue
+
+    uniq_items, seen = [], set()
+    for it in all_items:
+        if it not in seen:
+            seen.add(it)
+            uniq_items.append(it)
+
+    substring_matches = [it for it in uniq_items if q_low in it.lower()]
+
+    fuzzy_matches = []
+    if len(substring_matches) < max_suggestions:
+        def key(s: str) -> str:
+            return "".join(ch.lower() if ch.isalnum() or ch.isspace() else " " for ch in s).strip()
+
+        keys = {it: key(it) for it in uniq_items}
+        qk = key(q)
+
+        candidates = difflib.get_close_matches(
+            qk,
+            list(keys.values()),
+            n=max_suggestions * 3,
+            cutoff=cutoff
+        )
+
+        for it, k in keys.items():
+            if k in candidates:
+                fuzzy_matches.append(it)
+
+    matches, seen2 = [], set()
+    for it in substring_matches + fuzzy_matches:
+        if it not in seen2:
+            seen2.add(it)
+            matches.append(it)
+        if len(matches) >= max_suggestions:
+            break
+
+    if not matches:
+        return {"query": query, "matches": [], "prices": []}
+
+    return fetch_data(matches)
 
 
 
+print(get_item_price_by_name("dreams nightmares"))
 # get_message_stockholm_capsules()
