@@ -79,13 +79,20 @@ def get_item_price_by_name(query: str,
                            input_dir: str = "cs_market_data/input_files",
                            max_suggestions: int = 10,
                            cutoff: float = 0.52):
-    
+    """
+    Szuka query po wszystkich plikach .txt z input_dir (gdzie są NAZWY itemów po jednej na linię),
+    robi substring + fuzzy i zwraca fetch_data() dla TOP dopasowań.
+
+    WAŻNE: NIE używa get_data_from_file(), bo to jest do outputów (timestamp + listy),
+    a input_files mają zwykły tekst i ast.literal_eval tu wywala SyntaxError.
+    """
     q = (query or "").strip()
     if not q:
         return {"query": query, "matches": [], "prices": []}
 
     q_low = q.lower()
 
+    all_items = []
     for root, _, files in os.walk(input_dir):
         for fn in files:
             if fn.lower().endswith(".txt"):
